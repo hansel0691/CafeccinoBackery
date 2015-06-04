@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="BackeryApp.ViewSupply"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:BackeryApp="clr-namespace:BackeryApp"
+             mc:Ignorable="d" 
+              d:DesignHeight="640" d:DesignWidth="860">
+    <UserControl.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="#333"/>
+        </Style>
+        <DataTemplate x:Key="usedAmount">
+            <TextBlock HorizontalAlignment="Center" 
+               Text="{Binding UsedAmount}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="totalCost">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding TotalCost}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="cost">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding Cost}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid x:Name="mainBlock">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="56"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" Margin="0 10 0 10" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="145"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="63"></RowDefinition>
+                    <RowDefinition Height="17"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="17"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="118*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Información sobre Insumo" Foreground="#3399ff" FontSize="{StaticResource headerFontSize}" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,20,0,0" Grid.Column="1" Height="25" Width="227"  />
+
+                <TextBlock Text="Información básica" Foreground="#007acc"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" FontSize="{StaticResource minFontSize}" Margin="0,1,396,0" Height="16"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="2"  VerticalAlignment="Top" Margin="110,10,20,0" />
+
+
+                <TextBlock Text="Fichas de costo que utilizan este insumo" Foreground="#007acc"  Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" FontSize="{StaticResource minFontSize}" Margin="0,1,396,0" Height="16"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="5" Grid.Column="1"  Grid.ColumnSpan="2"  VerticalAlignment="Top" Margin="230,10,20,0" />
+
+                <WrapPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Height="Auto">
+
+                    <TextBlock  Text="Insumo:" Foreground="#555" FontSize="{StaticResource regularFontSize}"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,40,0,0" />
+                    <TextBlock  x:Name="templateNameText" Text="{Binding Supply.Name}" Foreground="#555" FontSize="{StaticResource regularFontSize}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,40,0" Height="17" />
+
+                    <WrapPanel Margin="30,25,40,0">
+                        <TextBlock Text="Formato:" Foreground="#555" FontSize="{StaticResource regularFontSize}"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0"/>
+                        <Grid Margin="15 0 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Cantidad:" Foreground="#555" FontSize="{StaticResource regularFontSize}"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            <TextBlock x:Name="formatAmountText" Foreground="#555" Text="{Binding Amount.Amount, Converter={StaticResource smartPrintConv}}" FontSize="{StaticResource regularFontSize}" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="17" Width="80"/>
+                            <ComboBox x:Name="formatAmountBox" SelectedValue="{Binding Amount.Unit, Converter={StaticResource measurementConv}, Mode=OneTime}" ItemsSource="{Binding Amount.RelatedUnits}" FontSize="12" Foreground="#555" Height="25" Width="64" Grid.Row="1" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="85,-5,0,0" />
+                        </Grid>
+                        <Grid Margin="20 0 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Costo:" Foreground="#555" FontSize="{StaticResource regularFontSize}"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            <TextBlock  x:Name="formatCostText" Foreground="#555" Text="{Binding Cost.Amount, Converter={StaticResource smartPrintConv}}" FontSize="{StaticResource regularFontSize}" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="17" Width="80"/>
+                            <ComboBox x:Name="formatCostBox" SelectedIndex="{Binding Cost.Unit, Converter={StaticResource currencyConv}, Mode=OneTime}" ItemsSource="{Binding Cost.AllUnits}" FontSize="{StaticResource regularFontSize}" Foreground="#555" Height="25" Width="54" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="85,-5,0,0" />
+                        </Grid>
+                    </WrapPanel>
+
+
+                    <Grid Margin="30 40 0 10">
+                        <TextBlock  Text="Descripción:" Foreground="#555" FontSize="{StaticResource regularFontSize}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="17" Width="71" />
+                        <TextBox  Text="{Binding Supply.Description, Converter={StaticResource StringConv}}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True"  VerticalScrollBarVisibility="Auto" Foreground="#555" FontSize="{StaticResource regularFontSize}"  TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="80 0 0 0" Width="500" Grid.ColumnSpan="3"/>
+                    </Grid>
+                </WrapPanel>
+
+                <Border x:Name="frameImage" Background="#fff" Height="100" Width="100" BorderBrush="#eee" BorderThickness="1"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="0,21,30,21" >
+                    <Image x:Name="img" />
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="5" Softness="1" Opacity="0.5"/>
+                    </Border.BitmapEffect>
+                </Border>
+
+                <TextBlock Text="Comparación de insumos por formato" Foreground="#007acc" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" FontSize="{StaticResource minFontSize}" Margin="0,1,396,0" Height="16"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2"  VerticalAlignment="Top" Margin="210,10,20,0" />
+
+
+                <Grid x:Name="comparerGrid" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,10,0,0" VerticalAlignment="Top"/>
+
+
+                <TextBox x:Name="searchTempateText" Text="Filtrar Fichas de Costo..." FontSize="14" Foreground="#aaa" Height="26" Width="400" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,10,0,0" ToolTip="Introduzca un nombre para filtrar en la base de datos." VerticalContentAlignment="Center"/>
+                <ListView x:Name="templateSupplyList" BorderBrush="#aaa" ItemsSource="{Binding RelatedTemplateSupplies}" MinHeight="200" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"  VerticalAlignment="Stretch" Margin="10 5 30 20" GridViewColumnHeader.Click="SortData">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nombre" Width="160" DisplayMemberBinding="{Binding Template.Name}"/>
+                            <GridViewColumn Header="Descripción" Width="160" DisplayMemberBinding="{Binding Template.Description, Converter={StaticResource StringConv}}"/>
+                            <GridViewColumn Header="Cantidad Utilizada" Width="140" CellTemplate="{StaticResource usedAmount}" />
+                            <GridViewColumn Header="Costo" Width="140" CellTemplate="{StaticResource cost}"/>
+                            <GridViewColumn Header="Costo Total" Width="140" CellTemplate="{StaticResource totalCost}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </ScrollViewer>
+        <Grid  Grid.Row="1" >
+            <Button x:Name="goMainMenu" Content="_Menu Principal" Height="20"  Width="90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50,0,0,15"/>
+            <Button x:Name="cancelButton" Content="_Atrás" Height="20" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,50,15" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="BackeryApp.IndexTemplates"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:loc="clr-namespace:BackeryApp"
+             xmlns:ClassUtils="clr-namespace:BackeryApp.ClassUtils" mc:Ignorable="d" 
+             d:DesignHeight="630" d:DesignWidth="850">
+    <UserControl.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <EventSetter Event="MouseDoubleClick" Handler="ViewCostTemplate"/>
+        </Style>
+        <DataTemplate x:Key="producedUnits">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding ProducedUnits}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="templateCost">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding Cost.Identifier}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="profit">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding Profit.Identifier}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="profitPercentage">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding Percentage}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="467*"/>
+            <RowDefinition Height="56"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Fichas de Costo" Foreground="#3399ff" FontSize="{StaticResource headerFontSize}" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,20,0,0" Grid.Column="1" />
+
+        <TextBox x:Name="searchTempateText" Text="Filtrar Fichas de Costo..." FontSize="14" Foreground="#aaa" Height="26" Width="300" ToolTip="Introduzca un nombre para filtrar en la base de datos." Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="5 0 0 0"/>
+        <TextBlock Text="Ver..." FontSize="14" FontStyle="Italic" Foreground="#555" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="10,0,200,0" />
+        <ComboBox x:Name="selectedFilterBox" FontSize="14" SelectedIndex="0" Foreground="#666" Width="140" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0 0 50 0">
+            <TextBlock>Todo</TextBlock>
+            <TextBlock>Complementarias</TextBlock>
+            <TextBlock>Terminadas</TextBlock>
+        </ComboBox>
+
+        <ListView x:Name="listView" BorderBrush="#aaa"  Margin="5,6,50,15" Grid.Row="2" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Grid.Column="1" GridViewColumnHeader.Click="SortData">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Templates en base de datos">
+                    <GridViewColumn Header="Nombre" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Descripción" Width="150" DisplayMemberBinding="{Binding Description, Converter={StaticResource stringConv}}"/>
+                    <GridViewColumn Header="Unidades Producidas" Width="140" CellTemplate="{StaticResource producedUnits}"/>
+                    <GridViewColumn Header="Costo Total" Width="140" CellTemplate="{StaticResource templateCost}"/>
+                    <GridViewColumn Header="Ganancia Neta" Width="150" CellTemplate="{StaticResource profit}"/>
+                    <GridViewColumn Header="% de Ganancia" Width="150" CellTemplate="{StaticResource profitPercentage}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid  Grid.Row="3" Grid.ColumnSpan="2">
+            <Button x:Name="goSuppliesIndex" Content="_Insumos" Height="20"  Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50,0,0,15"/>
+            <Button x:Name="newTemplateButton" Content="Nueva..." Height="20"  Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="130,0,0,15"/>
+            <Button x:Name="delTemplateButton" Content="Eliminar" Height="20" Width="70" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,210,15" />
+            <Button x:Name="editButton" Content="Editar" Height="20" Width="70" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,130,15" />
+            <Button x:Name="cancelButton" Content="_Atrás" Height="20" Width="70" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,50,15" />
+        </Grid>
+    </Grid>
+</UserControl>

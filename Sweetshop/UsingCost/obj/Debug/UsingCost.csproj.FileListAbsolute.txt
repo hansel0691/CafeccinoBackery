@@ -1,0 +1,17 @@
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\bin\Debug\UsingCost.dll
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\bin\Debug\UsingCost.pdb
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\bin\Debug\SupplyStock.dll
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\bin\Debug\SupplyStock.pdb
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\obj\Debug\UsingCost.csprojResolveAssemblyReference.cache
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\obj\Debug\UsingCost.dll
+D:\Development!!!\walkthroughs\Sweetshop\UsingCost\obj\Debug\UsingCost.pdb
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\UsingCost.dll
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\UsingCost.pdb
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\SupplyStock.dll
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\SupplyStock.pdb
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\obj\Debug\UsingCost.csprojResolveAssemblyReference.cache
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\obj\Debug\UsingCost.dll
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\obj\Debug\UsingCost.pdb
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\UsingCost.dll.config
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\EntityFramework.dll
+D:\Development!!!\Sweetshop(Desktop)\Sweetshop\UsingCost\bin\Debug\EntityFramework.xml

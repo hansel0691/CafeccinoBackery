@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="BackeryApp.EditProduction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Utils="clr-namespace:SupplyStock.Utils;assembly=SupplyStock"
+             mc:Ignorable="d" 
+             d:DesignHeight="640" Width="860">
+    <UserControl.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <EventSetter Event="MouseDoubleClick" Handler="AddTemplateToProduction"/>
+        </Style>
+        <DataTemplate x:Key="TemplateProfit">
+            <TextBlock HorizontalAlignment="Center" 
+               Text="{Binding ProfitPerUnit}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TemplateCost">
+            <TextBlock HorizontalAlignment="Center" 
+               Text="{Binding Cost}"/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type Utils:TemplateAmount}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="{Binding Template}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{StaticResource headerColor}" FontSize="{StaticResource minFontSize}"  Margin="0 2 0 0"/>
+
+                <TextBox x:Name="startMeasurementText" Text="{Binding Amount}" Width="60" Height="20" Foreground="#bbb" FontSize="{StaticResource minFontSize}" VerticalContentAlignment="Center" Grid.Column="1" Margin="10 0 0 0" LostFocus="ResetText" GotFocus="CleanAmountText"/>
+                <ComboBox x:Name="startMeasurementBox" SelectedIndex="0" IsEnabled="False" FontSize="11"  Width="65" Height="20" VerticalContentAlignment="Top" Grid.Column="2">
+                    <TextBlock>unit</TextBlock>
+                </ComboBox>
+
+            </Grid>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" Margin="50 10 0 0" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40.794"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="75"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="headeTitle" Text="Producción" Foreground="#3399ff" FontSize="{StaticResource headerFontSize}" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Grid.ColumnSpan="2"/>
+
+                <TextBlock Text="Información básica" Foreground="#007acc" FontSize="{StaticResource minFontSize}" Grid.Row="1" Margin="0 0 0 0"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="7,10,37,0" />
+
+                <Label x:Name="nameLabel" Content="Nombre:" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,0,0" Target="{Binding ElementName=nameText}" Height="27" Width="60" />
+                <TextBox x:Name="nameText" Text="{Binding Name}" FontSize="14" Foreground="#212121"  Height="26" ToolTip="Nombre de la producción que desea crear." Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,17,10,0"/>
+
+                <TextBlock Text="Dulces Utilizados" Foreground="#007acc"  Grid.Row="3" VerticalAlignment="Top" FontSize="{StaticResource minFontSize}" Margin="0,0,0,0" Height="16"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center"  Margin="100,5,37,0" Grid.Column="0"/>
+
+                <TextBox x:Name="SearchProductionText" Text="Filtrar Dulces..." FontSize="14" Foreground="#aaa" Height="26" ToolTip="Introduzca un nombre para filtrar en la base de datos." Grid.Row="4" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="74,10,10,0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+                <ListView x:Name="TemplatesListView" ItemsSource="{Binding Templates}" BorderBrush="#aaa" Height="250" Margin="74,3,10,0" ToolTip="Seleccione los dulces que desea adicionar a su planilla de costo." Grid.Row="5" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="100" Header="Nombre" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Width="110" Header="Costo Total" CellTemplate="{StaticResource TemplateCost}"/>
+                            <GridViewColumn Width="140" Header="Ganancia por Unidad" CellTemplate="{StaticResource TemplateProfit}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBlock x:Name="TemplateDescriptionText" Text="Descripción:" Foreground="{StaticResource headerColor}" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="74,5,27,0"/>
+
+                <TextBlock Text="Dulces Seleccionados:" TextWrapping="Wrap" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" VerticalAlignment="Top" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="0,18.794,0,0"/>
+                <Button x:Name="removeFromSelected" Cursor="Hand" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="2" Margin="0,0,27,5" >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <TextBlock  Text="Eliminar Todo" FontStyle="Italic" FontSize="{StaticResource regularFontSize}" Foreground="#428bca"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <ListBox x:Name="selectedSuppliesListBox" BorderBrush="#aaa" ItemsSource="{Binding TemplateAmounts}" Grid.Row="5" SelectionMode="Single" Height="250" Grid.Column="2" ToolTip="Dulces que se han añadido hasta el momento." VerticalAlignment="Top" Margin="0,3,27,0" />
+
+                <TextBlock Text="Costo de Dulce:" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,31,179,0" />
+                <TextBlock x:Name="supplyCost" Text="{Binding SelectedCost}" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}"  Width="90"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,31,82,0"/>
+                <ComboBox x:Name="calculateLocalCostList" SelectedIndex="{Binding SelectedCost.Unit, Converter={StaticResource currencyConv}, Mode=OneTime}" ItemsSource="{Binding Cost.AllUnits}" FontSize="11" Height="20" MinHeight="20" Width="50" Grid.Row="6" Grid.Column="2" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,29,27,0"/>
+
+
+                <TextBlock Text="Costo Total:" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,51,179,0" />
+                <TextBlock x:Name="suppliesCost" Text="{Binding Cost}" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}"  Width="90"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,51,82,0"/>
+                <ComboBox x:Name="calculatedCostList" SelectedIndex="{Binding Cost.Unit, Converter={StaticResource currencyConv}, Mode=OneTime}" ItemsSource="{Binding Cost.AllUnits}" FontSize="11" Height="20" MinHeight="20" Width="50" Grid.Row="6" Grid.Column="2" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,49,27,0"/>
+
+
+                <TextBlock Text="Cantidad de Dulces:" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,10,181,0"/>
+                <TextBlock x:Name="suppliesCount" Text="{Binding TemplateAmounts.Count}" Foreground="{StaticResource headerColor}" FontSize="{StaticResource regularFontSize}" Width="80" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" Margin="0,10,92,0"/>
+
+                <TextBlock Text="Miscelaneas" Foreground="#007acc" Grid.Row="7" VerticalAlignment="Top" FontSize="{StaticResource minFontSize}" Margin="0 1 0 0" Height="16"/>
+                <Line Stroke="#007acc" X1="0" Y1="0" X2="1"  Y2="0" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="1,3" Grid.Row="7"  Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="70,10,37,0"/>
+
+                <TextBox x:Name="detailsText" Text="{Binding Description}"  FontSize="{StaticResource regularFontSize}" Foreground="#212121" TextWrapping="Wrap" Height="50" ToolTip="Describa la producción introduciendo algún texto." VerticalScrollBarVisibility="Auto" Grid.Row="8" Grid.ColumnSpan="3" Margin="74,13,37,12"/>
+            </Grid>
+        </ScrollViewer>
+        <Grid  Grid.Row="1">
+            <Button x:Name="SaveButton" Content="" Height="20" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,130,15" />
+            <Button x:Name="CancelButton" Content="_Cancelar" Height="20" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,50,15" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="BackeryApp.SupplyComparer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="860" Width="Auto">
+    <Grid x:Name="contentGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{Binding Name, Converter={StaticResource formatConv}}" FontSize="13" Width="130" Foreground="#777" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <WrapPanel x:Name="CostPerBasicUnitPanel" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0">
+            <TextBlock x:Name="unitCostText" Text="{Binding Cost.Amount, Converter={StaticResource amountConv}}" FontSize="12" Foreground="#777" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"/>
+            <ComboBox x:Name="unitCostBox" SelectedIndex="{Binding Cost.Unit, Converter={StaticResource currencyConv}}" ItemsSource="{Binding UnitCost.AllUnits}" FontSize="{StaticResource regularFontSize}" Foreground="#555" Height="25" Width="54" VerticalContentAlignment="Center" Margin="10,0,0,0" />
+        </WrapPanel>
+
+        <Grid x:Name="middleGrid" Grid.Column="1">
+            <Rectangle x:Name="barRect" MinWidth="1" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#2BA9B9" >
+                <Rectangle.Triggers>
+                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1000" Duration="0:0:2" Storyboard.TargetProperty="(Rectangle.Width)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle>
+            <TextBlock Name="differenceInfo" Text="{Binding}"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </Grid>
+    </Grid>
+</UserControl>

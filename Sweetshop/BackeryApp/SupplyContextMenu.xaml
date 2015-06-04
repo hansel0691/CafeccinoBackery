@@ -1,0 +1,254 @@
+﻿<Grid x:Class="BackeryApp.SupplyContextMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      >
+    <Grid.Resources>
+        <Storyboard x:Key="LightCenter">
+            <ColorAnimation
+                                Storyboard.TargetName="MyAnimatedBrush"
+                                Storyboard.TargetProperty="Color"
+                                To="#5bc0de" Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="centerPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="topLine" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="BottomLine" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="OutCenter">
+            <ColorAnimation
+                                Storyboard.TargetName="MyAnimatedBrush"
+                                Storyboard.TargetProperty="Color"
+                                Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="centerPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="topLine" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3"/>
+            <DoubleAnimation Storyboard.TargetName="BottomLine" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Key="TopClick">
+            <DoubleAnimation Storyboard.TargetName="topPath" Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="TopUnClick">
+            <DoubleAnimation Storyboard.TargetName="topPath" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1"/>
+        </Storyboard>
+        
+        <Storyboard x:Key="LightTop">
+            <ColorAnimation
+                                Storyboard.TargetName="topGrap1"
+                                Storyboard.TargetProperty="Color"
+                                To="#5bc0de" Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="TopPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="topLine" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="OutTop">
+            <ColorAnimation
+                                Storyboard.TargetName="topGrap1"
+                                Storyboard.TargetProperty="Color"
+                                Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="TopPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="topLine" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Key="CenterClick">
+            <DoubleAnimation Storyboard.TargetName="centerPath" Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="CenterUnClick">
+            <DoubleAnimation Storyboard.TargetName="centerPath" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1"/>
+        </Storyboard>
+        
+        
+        <Storyboard x:Key="LightBottom">
+            <ColorAnimation
+                                Storyboard.TargetName="bottomGrap1"
+                                Storyboard.TargetProperty="Color"
+                                To="#5bc0de" Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="bottomPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="BottomLine" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="OutBottom">
+            <ColorAnimation
+                                Storyboard.TargetName="bottomGrap1"
+                                Storyboard.TargetProperty="Color"
+                                Duration="0:0:0.1" />
+            <ColorAnimation Storyboard.TargetName="bottomPathText" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="BottomLine" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3"/>
+        </Storyboard>       
+        <Storyboard x:Key="BottomClick">
+            <DoubleAnimation Storyboard.TargetName="bottomPath" Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.1"/>
+        </Storyboard>
+        <Storyboard x:Key="BottomUnClick">
+            <DoubleAnimation Storyboard.TargetName="bottomPath" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1"/>
+        </Storyboard>
+
+    </Grid.Resources>
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0*"/>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="0*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Rectangle RadiusX="15" RadiusY="15" Stroke="#ddd" StrokeThickness="1" Grid.RowSpan="3" Grid.ColumnSpan="2">
+        <Rectangle.Fill>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFBFBFB" Offset="0"/>
+                <GradientStop Color="#FFF1F1F1" Offset="1"/>
+            </LinearGradientBrush>
+        </Rectangle.Fill>
+        <Rectangle.BitmapEffect>
+            <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="10" Softness="1" Opacity="0.5"/>
+        </Rectangle.BitmapEffect>
+    </Rectangle>
+
+    <Path x:Name="topPath" Grid.Column="1" HorizontalAlignment="Left" Width="129">
+        <Path.Fill>
+            <SolidColorBrush x:Name="topGrap1" />
+        </Path.Fill>
+        <!--<Path.Fill>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop x:Name="topGrap1" Color="#f0f0f0" Offset="1"/>
+                <GradientStop x:Name="topGrap2" Color="#fdfdfd"/>
+            </LinearGradientBrush>
+        </Path.Fill>-->
+        <Path.Data>
+            <CombinedGeometry GeometryCombineMode="Union">
+                <CombinedGeometry.Geometry1>
+                    <RectangleGeometry Rect="1 1 128 26" RadiusX="16" RadiusY="16"/>
+                </CombinedGeometry.Geometry1>
+                <CombinedGeometry.Geometry2>
+                    <RectangleGeometry Rect="1 15 128 21"/>
+                </CombinedGeometry.Geometry2>
+            </CombinedGeometry>
+        </Path.Data>
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="Control.MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource LightTop}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutTop}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource TopClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource TopUnClick}"/>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+    <TextBlock x:Name="TopPathText" Text="Eliminar Selección" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource headerColor}" FontSize="{StaticResource minFontSize}" Margin="5,10"  Grid.Column="1">
+        <TextBlock.Triggers>
+            <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource LightTop}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutTop}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource TopClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource TopUnClick}"/>
+            </EventTrigger>
+        </TextBlock.Triggers>
+    </TextBlock>
+    <Rectangle x:Name="topLine" Stroke="#ccc" StrokeThickness="1" VerticalAlignment="Bottom" Grid.Row="0" Margin="5,0" Height="1" Grid.Column="1"/>
+
+    <Rectangle x:Name="centerPath" Grid.Column="1" Grid.Row="1" Margin="1 0">
+        <Rectangle.Fill>
+            <SolidColorBrush x:Name="MyAnimatedBrush" />
+        </Rectangle.Fill>
+        <Rectangle.Triggers>
+            <EventTrigger RoutedEvent="Control.MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource LightCenter}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Rectangle.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutCenter}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource CenterClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource CenterUnClick}"/>
+            </EventTrigger>
+        </Rectangle.Triggers>
+    </Rectangle>
+    <TextBlock x:Name="centerPathText" Text="Cambiar Medida" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Foreground="{StaticResource headerColor}" FontSize="{StaticResource minFontSize}" Margin="5 10" Grid.Column="1">
+        <TextBlock.Triggers>
+            <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource LightCenter}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutCenter}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource CenterClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource CenterUnClick}"/>
+            </EventTrigger>
+        </TextBlock.Triggers>
+    </TextBlock>
+    <Rectangle x:Name="BottomLine" Stroke="#cfcfcf" StrokeThickness="1" VerticalAlignment="Bottom" Grid.Row="1" Margin="5,0" Height="1" Grid.Column="1"/>
+    
+    <Path x:Name="bottomPath" Grid.Column="1" Grid.Row="2" RenderTransformOrigin="0.5,0.5">
+        <Path.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform Angle="180"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Path.RenderTransform>
+        <Path.Fill>
+            <SolidColorBrush x:Name="bottomGrap1" />
+        </Path.Fill>
+        <!--<Path.Fill>
+            <LinearGradientBrush x:Name="bottomPathFill" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop x:Name="bottomGrap1" Color="#eee" Offset="1"/>
+                <GradientStop x:Name="bottomGrap2"  Color="#fdfdfd"/>
+            </LinearGradientBrush>
+        </Path.Fill>-->
+        <Path.Data>
+            <CombinedGeometry GeometryCombineMode="Union">
+                <CombinedGeometry.Geometry1>
+                    <RectangleGeometry Rect="1 1 128 26" RadiusX="16" RadiusY="16"/>
+                </CombinedGeometry.Geometry1>
+                <CombinedGeometry.Geometry2>
+                    <RectangleGeometry Rect="1 15 128 21"/>
+                </CombinedGeometry.Geometry2>
+            </CombinedGeometry>
+        </Path.Data>
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="Path.MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource LightBottom}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutBottom}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource BottomClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource BottomUnClick}"/>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+    <TextBlock x:Name="bottomPathText" Text="Cancelar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Foreground="{StaticResource headerColor}" FontSize="{StaticResource minFontSize}" Margin="0 10" Grid.Column="1">
+        <TextBlock.Triggers>
+            <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource LightBottom}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource OutBottom}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseDown">
+                <BeginStoryboard Storyboard="{StaticResource BottomClick}"/>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseUp">
+                <BeginStoryboard Storyboard="{StaticResource BottomUnClick}"/>
+            </EventTrigger>
+        </TextBlock.Triggers>
+    </TextBlock>
+</Grid>

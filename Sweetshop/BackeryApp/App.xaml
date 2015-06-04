@@ -1,0 +1,26 @@
+﻿<Application x:Class="BackeryApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:my="clr-namespace:BackeryApp"
+             xmlns:ClassUtils="clr-namespace:BackeryApp.ClassUtils" StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <!--Here goes all the resources of your app-->
+        <!--minFontSize-->
+        <System:Double x:Key="minFontSize">12</System:Double>
+        <System:Double x:Key="regularFontSize">13</System:Double>
+        <System:Double x:Key="headerFontSize">19</System:Double>
+        <SolidColorBrush x:Key="headerColor">#1c1c1c</SolidColorBrush>
+        <ClassUtils:CurrencyConverter x:Key="currencyConv"/>
+        <ClassUtils:MeasurementConverter x:Key="measurementConv"/>
+        <ClassUtils:StringConverter x:Key="stringConv"/>
+        <ClassUtils:AmountConverter x:Key="amountConv"/>
+        <ClassUtils:InverseBooleanConverter x:Key="inverseConv"/>
+        <ClassUtils:StringConverter x:Key="StringConv"/>
+        <ClassUtils:DefinedConverter x:Key="definedConv"/>
+        <ClassUtils:FormatConverter x:Key="formatConv"/> 
+        <ClassUtils:DifferenceConverter x:Key="diffConv"/>
+        <ClassUtils:SmartPrintConverter x:Key="smartPrintConv"/>
+        <!--<my:MeasurementUnitConverter x:Key="measurementUnitConv"/>-->
+    </Application.Resources>
+</Application>
